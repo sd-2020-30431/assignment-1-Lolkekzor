@@ -5,9 +5,15 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
+    Hi {{ user.username }}!
+    
+    <p> Click below to check out your grocery lists :) </p>
+    <p> 
+        <a href="lists">My Lists</a>
+    </p>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a>
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">login</a>
+    <a href="auth/signup">sign up</a>
 {% endif %}
 {% endblock %}

@@ -12,5 +12,7 @@ class ListItemForm(forms.ModelForm):
         model = ListItem
         fields = ['name', 'quantity', 'calories', 'purchase_date', 'expiration_date', 'consumption_date']
         widgets = {
-            'made_on': DateInput(),
+            'purchase_date': DateInput(),
+            'expiration_date': DateInput(),
+            'consumption_date': DateInput()
         }

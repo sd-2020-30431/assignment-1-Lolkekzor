@@ -1,12 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView
+from django.views import generic
 
-from .models import List, ListItem
+from .models import List
 from .forms import ListItemForm
+
 
 # Create your views here.
 def index(request):
     return render(request, 'home.html')
+
+
+class ListView(generic.ListView):
+    model = List
+    template_name = 'lists.html'
 
 
 def list_view(request, list_id):
@@ -18,7 +25,7 @@ def list_view(request, list_id):
         'listitems': list_items,
         'form': ListItemForm()
     }
-    return render(request, 'list.html', context)
+    return render(request, 'list_detail.html', context)
 
 
 def list_add_item(request, list_id):
@@ -37,11 +44,3 @@ class ListCreate(CreateView):
     model = List
     fields = ['name']
     template_name = 'create_list.html'
-
-
-#def burndown_rate(request, list_id):
-
-#def add_list(request):
-#    if request.method == 'POST':
-#        form =
-#    return render(request, 'create_list.html')

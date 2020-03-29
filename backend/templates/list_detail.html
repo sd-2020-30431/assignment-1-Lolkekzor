@@ -1,16 +1,17 @@
-<!-- templates/list.html -->
+<!-- templates/list_detail.html -->
 {% extends 'base.html' %}
 
 {% block title %} Create List {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-    <p> Listname: {{ list.name }} </p> 
+    <p> List: {{ list.name }} </p> 
     <ul>
     {% for listitem in listitems %}
         <li> {{ listitem.name }} </li>
     {% endfor %}
     </ul>
+    <p> Burndown rate: {{ list.get_burndown_rate }} calories per day </p>
     <form action='{{ list.pk }}/add-item' method='post'>
         {% csrf_token %}
         {{ form.as_p }}

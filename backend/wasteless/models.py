@@ -9,6 +9,15 @@ class List(models.Model):
     def __str__(self):
         return self.name
 
+    def get_burndown_rate(self):
+        burndown = 0
+        for listitem in self.listitem_set.all():
+            time_until_stale = listitem.expiration_date - timezone.now()
+            if time_until_stale.days >= 0:
+                burndown += listitem.calories // (time_until_stale.days + 1)
+
+        return burndown
+
 
 class ListItem(models.Model):
     name = models.CharField(max_length=100)
